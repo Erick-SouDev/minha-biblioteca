@@ -1,0 +1,45 @@
+<header style="height: 200px;" th:fragment="nav-bar">
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<img src="/imagems/logo-topo.jpg" width="80" height="80">
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+			aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="#" style="color: darkblue; text-decoration: underline;">Voltar <span
+							class="sr-only">(current)</span></a>
+				</li>
+
+				<li class="nav-item active">
+					<a class="nav-link" href="#" style="color: darkblue; text-decoration: underline;">Deslogar <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Biblioteca Do Estudante</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Meus Dados</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						Administracao
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" th:href="@{/livro}">Cadastrar Livros</a>
+						<a class="dropdown-item" href="">Cadastrar Usuarios</a>
+						<a class="dropdown-item" href="/categoria">Cadastrar Categoria</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+
+	</nav>
+			
+
+</header>

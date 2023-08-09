@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragmentos/head :: head('Cadastro Categoria')}">
+</head>
+
+<body>
+	<div class="containe-fluid">
+		<header th:replace="~{fragmentos/nav-bar :: nav-bar}"></header>
+
+		<div class="container">
+			<div class="row-form">
+				<header class="top-title">
+					<div th:replace="~{fragmentos/titulo-modulos :: modulo('Cadastrar Categoria')}"></div>
+				</header>
+				
+				<div style="display: flex; justify-content: start;" class="serction-cad-categoria">
+					<form style="width: 100%;" method="post" th:action=@{/categoria/salvar} th:object="${categoria}">
+						<div th:replace="~{fragmentos/menssagem :: menssagem}"></div>
+
+						<div class="form-group">
+							<label for="id">Categoria Id</label>
+							<input name="id" th:field="*{id}" type="text" class="form-control" id="id"
+								readonly="readonly" placeholder="Id">
+						</div>
+
+						<div class="form-group">
+							<label for="categoria">Categoria</label>
+							<input name="nomeCategoria" th:field="*{nomeCategoria}" th:errorClass="is-invalid"
+								type="text" class="form-control " id="categoria" placeholder="Nome Da Categoria">
+							<div class="invalid-feedback" th:errors="*{nomeCategoria}"></div>
+						</div>
+						<div class="">
+							<button style="width: 100%;" type="submit" class="btn btn-primary">Enviar</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+
+			<br></br>
+			<div class="section-seach">
+				<address class="seach">
+					<legend class="legend">Pesquisar</legend>
+				</address>
+			</div>
+
+			<div class="content-table" style="padding: 10px;">
+				<table class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Nome Categoria</th>
+							<th scope="col">Editar</th>
+							<th scope="col">Excluir</th>
+
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each=" c : ${categorias.content}">
+							<td th:text="${c.id}"></td>
+							<td th:text="${c.nomeCategoria}"></td>
+							<td><a class="btn btn-primary" th:href="@{/categoria/{id}/editar(id=${c.id})}"role="button">Editar</a>
+							<td><a class="btn btn-danger" th:href="@{/categoria/{id}/excluir(id=${c.id})}"role="button">Excluir</a>
+
+							</td>
+						</tr>
+
+					</tbody>
+
+
+				</table>
+
+				<div style="height: 300px;">
+					<div th:if="${categorias.totalPages > 0}">
+						<th:block th:each="index : ${#numbers.sequence(0 , categorias.totalPages - 1)}">
+							<a th:class="page-link"  style="display: inline-block ; background-color: paleturquoise;"
+								th:href="@{/categoria/pagination(page=${index}, size=${categorias.size})}">[[${index} +1]]</a>
+						</th:block>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+
+</html>

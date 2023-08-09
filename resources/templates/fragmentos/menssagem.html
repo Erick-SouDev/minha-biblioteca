@@ -1,0 +1,15 @@
+
+
+	<div  th:if="${msg != null }" th:fragment="menssagem" class="alert alert-warning alert-dismissible fade show" role="alert">
+		<strong>
+			<h6 style="color: rgb(24, 236, 19);"></h6>
+		</strong>
+		<h6 th:text="${msg}"></h6>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
+
+
+
