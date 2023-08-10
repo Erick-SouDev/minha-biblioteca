@@ -18,32 +18,29 @@ import jakarta.validation.Valid;
 @Controller
 public class ControleLivro {
 	@Autowired
-	private RepositoryCategoriaLivro repositoryCategoriaLivro; 
- 
-	@GetMapping(value = {"/livro"})
+	private RepositoryCategoriaLivro repositoryCategoriaLivro;
+
+	@GetMapping(value = { "/livro" })
 	public ModelAndView cadLivro() {
 		ModelAndView modelAndView = new ModelAndView("view/cadLivro");
 		modelAndView.addObject("combCategorias", repositoryCategoriaLivro.carregarCategorias());
 		modelAndView.addObject("livro", new Livro());
 		return modelAndView;
 	}
-	
-	
-	
-	@PostMapping(value = {"/livro/novo"})
-	public ModelAndView salvarLivro(@Valid Livro livro  , BindingResult bindingResult) {
+
+	@PostMapping(value = { "/livro/novo" })
+	public ModelAndView salvarLivro(@Valid Livro livro, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView("view/cadLivro");
-		if(bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			modelAndView.addObject("combCategorias", repositoryCategoriaLivro.carregarCategorias());
+
 			return modelAndView;
 
 		}
 		modelAndView.addObject("combCategorias", repositoryCategoriaLivro.carregarCategorias());
-	
+
 		System.out.println(livro);
 		return modelAndView;
 	}
-	
-	
-	
+
 }

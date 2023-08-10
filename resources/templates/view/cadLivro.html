@@ -10,10 +10,13 @@
 
 		<div class="body-form" style="width: 90%; margin: auto;">
 			<header class="top-title">
-				<div th:replace="~{fragmentos/titulo-modulos :: modulo('Cadastrar Livros')}"></div>
+				<div class="painel-top" >
+					<div th:replace="~{fragmentos/titulo-modulos :: modulo('Cadastrar Livros')}"></div>
+				</div>
 			</header>
 
-			<form method="post" th:action="@{/livro/novo}" th:object="${livro}">
+			<form method="post" th:action="@{/livro/novo}"
+				th:object="${livro}">
 				<div class="form-row">
 					<div class="form-group col-md-3">
 						<label for="id">ID</label>
@@ -50,7 +53,8 @@
 						<label for="categoria">Categoria do Livro</label>
 						<select name="categoria" id="categoria" class="form-control">
 							<option selected>[--Selecione a Categoria--]</option>
-							<option  th:each="categ : ${combCategorias}" th:value="${categ.id}"	th:text="${categ.nomeCategoria}" />
+							<option th:each="categ : ${combCategorias}" th:value="${categ.id}"
+								th:text="${categ.nomeCategoria}" />
 						</select>
 						<div style="display: block;" th:class="invalid-feedback" th:errors="*{categoria}"></div>
 					</div>
@@ -63,9 +67,9 @@
 
 					<div class="form-group" style="width: 600px;">
 						<label for="exampleFormControlTextarea1">Descricao</label>
-						<textarea  name="descricao" th:field="*{descricao}" minlength="0"
-							maxlength="600" placeholder="Maximo 600 Caracteres" class="form-control"
-							id="exampleFormControlTextarea1" rows="3"></textarea>
+						<textarea name="descricao" th:field="*{descricao}" minlength="0" maxlength="600"
+							placeholder="Maximo 600 Caracteres" class="form-control" id="exampleFormControlTextarea1"
+							rows="3"></textarea>
 						<div style="display: block;" th:class="invalid-feedback" th:errors="*{descricao}"></div>
 
 					</div>

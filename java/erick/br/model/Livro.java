@@ -29,8 +29,7 @@ public class Livro implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(allocationSize = 1, initialValue = 100, name = "seq_id_livro")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_id_livro")
+	@GeneratedValue(strategy = GenerationType.AUTO )
 	private Long id;
 
 	@NotBlank(message = "informe  o titulo")
@@ -52,7 +51,8 @@ public class Livro implements Serializable {
 	@Column(name = "descricao", columnDefinition = "text")
 	private String descricao;
 
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, optional = false)
+	@ManyToOne( fetch = FetchType.LAZY, optional = false )
+	@org.hibernate.annotations.ForeignKey(name = "categoria_id")
 	@NotNull(message = "selecione uma categoria")
 	private Categoria categoria;
 

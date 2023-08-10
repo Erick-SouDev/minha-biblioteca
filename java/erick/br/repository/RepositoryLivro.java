@@ -18,19 +18,14 @@ import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface RepositoryCategoriaLivro extends JpaRepository<Categoria, Long> {
-	
-	
-	@Query("select  c  from Categoria c")
-	public List<Categoria> carregarCategorias();
+public interface RepositoryLivro extends JpaRepository<Livro, Long> {
 
-	@Query("select c from Categoria c where c.id = ?1")
-	public Categoria editarCategoriaSelecionada(@Param("id") Long id);
+	@Query("select l from Livro l where l.titulo like %?1% ")
+	public List<Livro> pesquisarLivros(@Param("titulo") String titulo);
 
-	
-	@Query("select c from Categoria c")
-	public Page<Categoria> findAllCategoriaPaginada(Pageable pageable); 
+	@Query("select l from Livro l where l.categoria_id = ?1")
 
-	
+	public List<Livro> pesquisarLivros(@Param("id") Long titulo);
+
 
 }
