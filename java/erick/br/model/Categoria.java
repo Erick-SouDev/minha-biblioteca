@@ -1,34 +1,40 @@
 package erick.br.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.thymeleaf.expression.Objects;
-
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OrderBy;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue( strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
-	
+
 	private Long id;
 
-	
-	@NotEmpty(message = "Informe a Categoria "  )
+	@NotEmpty(message = "Informe a Categoria ")
 	private String nomeCategoria;
 
-	
+	@OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
+	private List<Livro> todosLivros = new ArrayList<>();
+
+	public List<Livro> getTodosLivros() {
+		return todosLivros;
+	}
+
+	public void setTodosLivros(List<Livro> todosLivros) {
+		this.todosLivros = todosLivros;
+	}
 
 	public Categoria() {
 	}
@@ -70,7 +76,5 @@ public class Categoria implements Serializable {
 	public String toString() {
 		return "Categoria [id=" + id + ", nomeCategoria=" + nomeCategoria + "]";
 	}
- 
-
 
 }

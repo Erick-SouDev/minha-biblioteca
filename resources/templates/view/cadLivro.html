@@ -13,7 +13,7 @@
 				<div th:replace="~{fragmentos/titulo-modulos :: modulo('Cadastrar Livros')}"></div>
 			</header>
 
-			<form method="post" th:object="${livro}" th:action="@{/livro/novo}">
+			<form method="post" th:action="@{/livro/novo}" th:object="${livro}">
 				<div class="form-row">
 					<div class="form-group col-md-3">
 						<label for="id">ID</label>
@@ -22,46 +22,60 @@
 					</div>
 					<div class="form-group col-md-4">
 						<label for="titulo">Titulo Do Livro</label>
-						<input name="titulo"  type="text" class="form-control" id="titulo" placeholder="Ex: Nome Do Livro">
+						<input th:errorClass="is-invalid" name="titulo" th:field="*{titulo}" type="text"
+							class="form-control" id="titulo" placeholder="Ex: Nome Do Livro">
+						<div style="display: block;" class="invalid-feedback" th:errors="*{titulo}"></div>
+
 					</div>
 					<div class="form-group col-md-4">
 						<label for="subtitulo">Sub-Titulo</label>
-						<input name="subtitulo" type="text" class="form-control" id="subtitulo" placeholder="Ex: Assunto do Livro">
+						<input th:errorClass="is-invalid" name="subtitulo" th:field="*{subTitulo}" type="text"
+							class="form-control" id="subtitulo" placeholder="Ex: Assunto do Livro">
+						<div style="display: block;" class="invalid-feedback" th:errors="*{subTitulo}"></div>
+
 					</div>
 				</div>
-				
-				
+
+
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="urlcapalivro">Url da capa do livro</label>
-						<input name="urlcapalivro" type="text" class="form-control" id="urlcapalivro" placeholder="Ex: o indereco da imagem">
+						<input th:errorClass="is-invalid" name="urlcapalivro" th:field="*{urlCapaLivro}" type="text"
+							class="form-control" id="urlcapalivro" placeholder="Ex: o indereco da imagem">
+						<div style="display: block;" class="invalid-feedback" th:errors="*{urlCapaLivro}"></div>
+
 					</div>
-				
+
 					<div class="form-group col-md-4">
-						<label for="inputState">Categoria do Livro</label>
-						<select name="categoria" id="inputState" class="form-control">
+						<label for="categoria">Categoria do Livro</label>
+						<select name="categoria" id="categoria" class="form-control">
 							<option selected>[--Selecione a Categoria--]</option>
-							<option th:each="categ : ${combCategorias}" th:value="${categ.id}" th:text="${categ.nomeCategoria}" />
+							<option  th:each="categ : ${combCategorias}" th:value="${categ.id}"	th:text="${categ.nomeCategoria}" />
 						</select>
+						<div style="display: block;" th:class="invalid-feedback" th:errors="*{categoria}"></div>
 					</div>
-				
+
 					<div class="form-group col-md-2">
 						<label for="numerospaginas">Paginas</label>
-						<input type="number"  placeholder="Ex: Quantidade Paginas" class="form-control" id="numerospaginas">
+						<input type="number" placeholder="Ex: Quantidade Paginas" class="form-control"
+							id="numerospaginas">
 					</div>
-					
+
 					<div class="form-group" style="width: 600px;">
 						<label for="exampleFormControlTextarea1">Descricao</label>
-						<textarea name="descricao" minlength="0" maxlength="600" placeholder="Maximo 600 Caracteres" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						<textarea  name="descricao" th:field="*{descricao}" minlength="0"
+							maxlength="600" placeholder="Maximo 600 Caracteres" class="form-control"
+							id="exampleFormControlTextarea1" rows="3"></textarea>
+						<div style="display: block;" th:class="invalid-feedback" th:errors="*{descricao}"></div>
+
 					</div>
-				
 				</div>
-				
-				
+
+
 				<button type="submit" class="btn btn-primary">Registrar novo livro</button>
-				<button type="submit" class="btn btn-primary">limpar</button>
-				
-				</form>
+				<button type="button" class="btn btn-primary">limpar</button>
+
+			</form>
 
 		</div>
 
