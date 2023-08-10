@@ -13,16 +13,16 @@
 				<div th:replace="~{fragmentos/titulo-modulos :: modulo('Cadastrar Livros')}"></div>
 			</header>
 
-			<form method="post" th:object="${livro}" th:action="@{/livro/salvar}">
+			<form method="post" th:object="${livro}" th:action="@{/livro/novo}">
 				<div class="form-row">
 					<div class="form-group col-md-3">
-						<label for="inputEmail4">ID</label>
-						<input name="id" type="text" class="form-control" readonly="readonly" id="inputEmail4"
+						<label for="id">ID</label>
+						<input name="id" type="text" class="form-control" readonly="readonly" id="id"
 							placeholder="Ex: identificador">
 					</div>
 					<div class="form-group col-md-4">
 						<label for="titulo">Titulo Do Livro</label>
-						<input name="titulo" type="text" class="form-control" id="titulo" placeholder="Ex: Nome Do Livro">
+						<input name="titulo"  type="text" class="form-control" id="titulo" placeholder="Ex: Nome Do Livro">
 					</div>
 					<div class="form-group col-md-4">
 						<label for="subtitulo">Sub-Titulo</label>
@@ -34,25 +34,25 @@
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="urlcapalivro">Url da capa do livro</label>
-						<input name="url" type="url" class="form-control" id="urlcapalivro" placeholder="Ex: o indereco da imagem">
+						<input name="urlcapalivro" type="text" class="form-control" id="urlcapalivro" placeholder="Ex: o indereco da imagem">
 					</div>
 				
 					<div class="form-group col-md-4">
 						<label for="inputState">Categoria do Livro</label>
-						<select id="inputState" class="form-control">
+						<select name="categoria" id="inputState" class="form-control">
 							<option selected>[--Selecione a Categoria--]</option>
 							<option th:each="categ : ${combCategorias}" th:value="${categ.id}" th:text="${categ.nomeCategoria}" />
 						</select>
 					</div>
 				
 					<div class="form-group col-md-2">
-						<label for="inputZip">Paginas</label>
-						<input type="number" placeholder="Ex: Quantidade Paginas" class="form-control" id="inputZip">
+						<label for="numerospaginas">Paginas</label>
+						<input type="number"  placeholder="Ex: Quantidade Paginas" class="form-control" id="numerospaginas">
 					</div>
 					
 					<div class="form-group" style="width: 600px;">
 						<label for="exampleFormControlTextarea1">Descricao</label>
-						<textarea minlength="200" maxlength="600" placeholder="Maximo 600 Caracteres" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						<textarea name="descricao" minlength="0" maxlength="600" placeholder="Maximo 600 Caracteres" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 					</div>
 				
 				</div>

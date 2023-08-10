@@ -14,7 +14,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -41,16 +43,14 @@ public class Livro implements Serializable {
 	@Column(name = "urlcapalivro", columnDefinition = "text")
 	private String urlCapaLivro;
 	
-	@NotBlank(message = "informe o o numero de paginas")
 	@Column(name = "totalpaginas", length = 3000)
 	private Long totalPagina;
 
 	@NotBlank(message = "informe o a descricao do livro uma breve resumo")
-	@Size(min = 100 , max = 600 , message = "maximo 600 caractere")
 	@Column(name = "descricao", columnDefinition = "text" )
 	private String descricao;
 	@Valid
-	@NotBlank(message = "informe a categoria")
+	@NotNull(message = "informe a categoria" )
 	@ManyToOne(cascade = CascadeType.REFRESH , fetch = FetchType.LAZY , optional = false )
 	private Categoria categoria;
 	
