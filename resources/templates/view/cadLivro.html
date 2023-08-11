@@ -4,57 +4,54 @@
 <head th:insert="~{fragmentos/head :: head('Cadastro Categoria')}">
 </head>
 
-<body>
+<body style="height: 1200px; margin: 0; padding: 0;">
 	<header th:replace="~{fragmentos/nav-bar :: nav-bar}"></header>
-	<div class="container-fluid">
-
+	<div style="margin-top: -5%;" class="container-fluid">
 		<div class="body-form" style="width: 90%; margin: auto;">
 			<header class="top-title">
-				<div class="painel-top" >
+				<div class="painel-top">
 					<div th:replace="~{fragmentos/titulo-modulos :: modulo('Cadastrar Livros')}"></div>
 				</div>
 			</header>
 
 			<form id="formlivro" method="post" th:action="@{/livro/novo}" th:object="${livro}">
-						<div th:replace="~{fragmentos/menssagem :: menssagem}"></div>
+				<div th:replace="~{fragmentos/menssagem :: menssagem}"></div>
+
 				<div class="form-row">
 					<div class="form-group col-md-3">
 						<label for="id">ID</label>
 						<input name="id" th:field="*{id}" type="text" class="form-control" readonly="readonly" id="id"
 							placeholder="Ex: identificador">
 					</div>
+
 					<div class="form-group col-md-4">
 						<label for="titulo">Titulo Do Livro</label>
 						<input th:errorClass="is-invalid" name="titulo" th:field="*{titulo}" type="text"
 							class="form-control" id="titulo" placeholder="Ex: Nome Do Livro">
 						<div style="display: block;" class="invalid-feedback" th:errors="*{titulo}"></div>
-
 					</div>
+
 					<div class="form-group col-md-4">
 						<label for="subtitulo">Sub-Titulo</label>
 						<input th:errorClass="is-invalid" name="subtitulo" th:field="*{subTitulo}" type="text"
 							class="form-control" id="subtitulo" placeholder="Ex: Assunto do Livro">
 						<div style="display: block;" class="invalid-feedback" th:errors="*{subTitulo}"></div>
-
 					</div>
 				</div>
-
-
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="urlcapalivro">Url da capa do livro</label>
 						<input th:errorClass="is-invalid" name="urlcapalivro" th:field="*{urlCapaLivro}" type="text"
 							class="form-control" id="urlcapalivro" placeholder="Ex: o indereco da imagem">
 						<div style="display: block;" class="invalid-feedback" th:errors="*{urlCapaLivro}"></div>
-
 					</div>
 
 					<div class="form-group col-md-4">
 						<label for="categoria">Categoria do Livro</label>
 						<select name="categoria" id="categoria" class="form-control">
 							<option selected>[--Selecione a Categoria--]</option>
-							<option th:each="categ : ${combCategorias}" th:value="${categ.id}" th:field="*{categoria}" th:text="${categ.nomeCategoria}" 
-							/>
+							<option th:each="categ : ${combCategorias}" th:value="${categ.id}" th:field="*{categoria}"
+								th:text="${categ.nomeCategoria}" />
 						</select>
 						<div style="display: block;" th:class="invalid-feedback" th:errors="*{categoria}"></div>
 					</div>
@@ -68,21 +65,47 @@
 					<div class="form-group" style="width: 600px;">
 						<label for="exampleFormControlTextarea1">Descricao</label>
 						<textarea name="descricao" th:field="*{descricao}" minlength="0" maxlength="600"
-							placeholder="Maximo 600 Caracteres" class="form-control" id="exampleFormControlTextarea1"rows="3"></textarea>
+							placeholder="Maximo 600 Caracteres" class="form-control" id="exampleFormControlTextarea1"
+							rows="3"></textarea>
 						<div style="display: block;" th:class="invalid-feedback" th:errors="*{descricao}"></div>
-
 					</div>
+
 				</div>
-
-
 				<button type="submit" class="btn btn-primary">Registrar novo livro</button>
 				<button type="button" id="btn-limpar" class="btn btn-primary">limpar</button>
-
 			</form>
-
 		</div>
-
 	</div>
+	<div  class="container-fluid">
+		<div style="display: flex; align-items: flex-end; justify-content: end;">
+			<div class="content-seach"  >
+				<nav class="navbar navbar-light bg-light">
+					<form class="form-inline" id="formseach" method="post" action="/livro/consultar">
+						<input class="form-control mr-sm-2" type="search" placeholder="digite nome do livro ou categoia " aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Colsultar Livro</button>
+					</form>
+				</nav>
+			</div>
+		</div>
+		<div>
+			<table id="tabelaLivros" class="table">
+				<span style="color: darkblue;"> Lista De Livros </span>
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Cod</th>
+						<th scope="col">Tutulo</th>
+						<th scope="col">Categoria</th>
+						<th scope="col">Editar</th>
+						<th scope="col">Editar</th>
+					</tr>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
 </body>
 
 
