@@ -15,12 +15,12 @@
 				</div>
 			</header>
 
-			<form method="post" th:action="@{/livro/novo}"
-				th:object="${livro}">
+			<form id="formlivro" method="post" th:action="@{/livro/novo}" th:object="${livro}">
+						<div th:replace="~{fragmentos/menssagem :: menssagem}"></div>
 				<div class="form-row">
 					<div class="form-group col-md-3">
 						<label for="id">ID</label>
-						<input name="id" type="text" class="form-control" readonly="readonly" id="id"
+						<input name="id" th:field="*{id}" type="text" class="form-control" readonly="readonly" id="id"
 							placeholder="Ex: identificador">
 					</div>
 					<div class="form-group col-md-4">
@@ -53,8 +53,8 @@
 						<label for="categoria">Categoria do Livro</label>
 						<select name="categoria" id="categoria" class="form-control">
 							<option selected>[--Selecione a Categoria--]</option>
-							<option th:each="categ : ${combCategorias}" th:value="${categ.id}"
-								th:text="${categ.nomeCategoria}" />
+							<option th:each="categ : ${combCategorias}" th:value="${categ.id}" th:field="*{categoria}" th:text="${categ.nomeCategoria}" 
+							/>
 						</select>
 						<div style="display: block;" th:class="invalid-feedback" th:errors="*{categoria}"></div>
 					</div>
@@ -68,8 +68,7 @@
 					<div class="form-group" style="width: 600px;">
 						<label for="exampleFormControlTextarea1">Descricao</label>
 						<textarea name="descricao" th:field="*{descricao}" minlength="0" maxlength="600"
-							placeholder="Maximo 600 Caracteres" class="form-control" id="exampleFormControlTextarea1"
-							rows="3"></textarea>
+							placeholder="Maximo 600 Caracteres" class="form-control" id="exampleFormControlTextarea1"rows="3"></textarea>
 						<div style="display: block;" th:class="invalid-feedback" th:errors="*{descricao}"></div>
 
 					</div>
@@ -77,7 +76,7 @@
 
 
 				<button type="submit" class="btn btn-primary">Registrar novo livro</button>
-				<button type="button" class="btn btn-primary">limpar</button>
+				<button type="button" id="btn-limpar" class="btn btn-primary">limpar</button>
 
 			</form>
 
@@ -87,7 +86,7 @@
 </body>
 
 
-
+<script src="/js/formlivro.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>

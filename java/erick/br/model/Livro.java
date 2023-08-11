@@ -3,22 +3,16 @@ package erick.br.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
+import erick.br.anotacens.personalizadas.ValideImageBase64;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 @Entity
 public class Livro implements Serializable {
@@ -40,6 +34,7 @@ public class Livro implements Serializable {
 	@Column(name = "subtitulo", length = 150)
 	private String subTitulo;
 	
+	@ValideImageBase64(text = "OI TESTE")
 	@NotBlank(message = "informe a url ")
 	@Column(name = "urlcapalivro", columnDefinition = "text")
 	private String urlCapaLivro;
