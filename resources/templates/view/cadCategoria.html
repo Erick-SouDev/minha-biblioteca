@@ -15,7 +15,10 @@
 				</header>
 				
 				<div style="display: flex; justify-content: start;" class="serction-cad-categoria">
-					<form style="width: 100%;" method="post" th:action=@{/categoria/salvar} th:object="${categoria}">
+
+					<form id="formcategoria" style="width: 100%;" method="post" th:action=@{/categoria/salvar} th:object="${categoria}">
+					  
+					 
 						<div th:replace="~{fragmentos/menssagem :: menssagem}"></div>
 
 						<div class="form-group">
@@ -30,8 +33,10 @@
 								type="text" class="form-control " id="categoria" placeholder="Nome Da Categoria">
 							<div class="invalid-feedback" th:errors="*{nomeCategoria}"></div>
 						</div>
-						<div class="">
-							<button style="width: 100%;" type="submit" class="btn btn-primary">Enviar</button>
+						<div class="content">
+							<button  type="submit" class="btn btn-primary">Enviar</button>
+							<button  type="button" id="btn-limpar" class="btn btn-primary">Limpar</button>
+
 						</div>
 
 					</form>
@@ -88,6 +93,7 @@
 </body>
 
 
+<script src="/js/formCategoria.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

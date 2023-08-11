@@ -1,22 +1,21 @@
-package erick.br.anotacens.personalizadas.util;
+package erick.br.anotacens.personalizadas;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import erick.br.anotacens.personalizadas.ValideImageBase64;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class UrlValidacao implements ConstraintValidator<ValideImageBase64, String> {
+public class ValidacaoUtil implements ConstraintValidator<ValidacaoUrl, String> {
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		// TODO Auto-generated method stub
 
-		String regexBase64 = "data:image/(png|jpeg|jpg|gif);base64,[A-Za-z0-9+/]+={0,2}";
-		Pattern expressao = Pattern.compile(regexBase64);
+		String urlValida = "^(https?|ftp)://([A-Za-z0-9.-]+)(:[0-9]+)?(/.*)?$";
+		Pattern expressao = Pattern.compile(urlValida);
 		Matcher crieterio = expressao.matcher(value);
-	
+		
 		return crieterio.matches();
 	}
 
