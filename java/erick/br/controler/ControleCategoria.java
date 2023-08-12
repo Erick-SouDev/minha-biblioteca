@@ -37,7 +37,7 @@ public class ControleCategoria {
 	}
 
 	@PostMapping(value = { "/categoria/salvar" })
-	public ModelAndView cadastrarCategoria(@Valid Categoria categoria, BindingResult bindingResult) {
+	public ModelAndView cadastrarCategoria(@Valid Categoria categoria, BindingResult bindingResult  ) {
 
 		ModelAndView modelview = new ModelAndView("view/cadCategoria");
 		if (bindingResult.hasErrors()) {

@@ -1,7 +1,11 @@
 package erick.br.controler;
 
+import java.awt.print.Pageable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.BindResult;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +32,7 @@ public class ControleLivro {
 	public ModelAndView cadLivro() {
 		ModelAndView modelAndView = new ModelAndView("view/cadLivro");
 		modelAndView.addObject("combCategorias", repositoryCategoriaLivro.carregarCategorias());
+		modelAndView.addObject("listaLivros", repositoryLivro.findAll(PageRequest.of(0, 5)));
 		modelAndView.addObject("livro", new Livro());
 		return modelAndView;
 	}
@@ -37,6 +42,8 @@ public class ControleLivro {
 		ModelAndView modelAndView = new ModelAndView("view/cadLivro");
 		if (bindingResult.hasErrors()) {
 			modelAndView.addObject("combCategorias", repositoryCategoriaLivro.carregarCategorias());
+			modelAndView.addObject("listaLivros", repositoryLivro.findAll(PageRequest.of(0, 5)));
+
 			return modelAndView;
 
 		}
@@ -51,7 +58,19 @@ public class ControleLivro {
 		Livro novoLivro = repositoryLivro.save(livro);
 		modelAndView.addObject("livro", novoLivro);
 		modelAndView.addObject("combCategorias", repositoryCategoriaLivro.carregarCategorias());
+		modelAndView.addObject("listaLivros", repositoryLivro.findAll(PageRequest.of(0, 5)));
+
 		return modelAndView;
 	}
+	
+	
+	@GetMapping(value = {"/livro/pagination"})
+	public ModelAndView livroPagination(@PageableDefault(page = 5) Pageable pageable) {
+		
+		return null;
+	}
+	
+	
+
 
 }

@@ -9,7 +9,7 @@ import jakarta.validation.Payload;
 
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ValidacaoUtil.class)
+@Constraint(validatedBy = ValidacaoUUtil.class)
 public @interface ValidacaoUrl {
 
 	String text();

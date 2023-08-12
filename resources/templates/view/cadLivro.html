@@ -6,7 +6,7 @@
 
 <body style="height: 1200px; margin: 0; padding: 0;">
 	<header th:replace="~{fragmentos/nav-bar :: nav-bar}"></header>
-	<div style="margin-top: -5%;" class="container-fluid">
+	<div  class="container-fluid">
 		<div class="body-form" style="width: 90%; margin: auto;">
 			<header class="top-title">
 				<div class="painel-top">
@@ -38,6 +38,7 @@
 						<div style="display: block;" class="invalid-feedback" th:errors="*{subTitulo}"></div>
 					</div>
 				</div>
+
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="urlcapalivro">Url da capa do livro</label>
@@ -57,37 +58,38 @@
 					</div>
 
 					<div class="form-group col-md-2">
-						<label for="numerospaginas">Paginas</label>
-						<input type="number" placeholder="Ex: Quantidade Paginas" class="form-control"
-							id="numerospaginas">
+						<label for="numerospaginas">Paginas</label><input type="number"
+							placeholder="Ex: Quantidade Paginas" class="form-control" id="numerospaginas">
 					</div>
 
 					<div class="form-group" style="width: 600px;">
-						<label for="exampleFormControlTextarea1">Descricao</label>
-						<textarea name="descricao" th:field="*{descricao}" minlength="0" maxlength="600"
-							placeholder="Maximo 600 Caracteres" class="form-control" id="exampleFormControlTextarea1"
-							rows="3"></textarea>
+						<label for="exampleFormControlTextarea1">Descricao</label><textarea name="descricao"
+							th:field="*{descricao}" minlength="0" maxlength="600" placeholder="Maximo 600 Caracteres"
+							class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 						<div style="display: block;" th:class="invalid-feedback" th:errors="*{descricao}"></div>
 					</div>
-
 				</div>
+
 				<button type="submit" class="btn btn-primary">Registrar novo livro</button>
 				<button type="button" id="btn-limpar" class="btn btn-primary">limpar</button>
 			</form>
 		</div>
+
 	</div>
-	<div  class="container-fluid">
-		<div style="display: flex; align-items: flex-end; justify-content: end;">
-			<div class="content-seach"  >
+	<div class="container-fluid">
+		<div class="body-table">
+			<div class="content-seach" style="display: flex; align-items: flex-end; justify-content: flex-end;">
 				<nav class="navbar navbar-light bg-light">
 					<form class="form-inline" id="formseach" method="post" action="/livro/consultar">
-						<input class="form-control mr-sm-2" type="search" placeholder="digite nome do livro ou categoia " aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Colsultar Livro</button>
+						<input style="width: 300px;" class="form-control mr-sm-2" type="search"
+							placeholder="digite nome do livro  " aria-label="Search">
+						<button class="btn btn-success my-2 my-sm-0" type="submit">consultar livro</button>
 					</form>
 				</nav>
 			</div>
 		</div>
-		<div>
+
+		<div class="body-table" style=" margin: auto;">
 			<table id="tabelaLivros" class="table">
 				<span style="color: darkblue;"> Lista De Livros </span>
 				<thead class="thead-dark">
@@ -100,7 +102,13 @@
 					</tr>
 				</thead>
 				<tbody>
+					<tr th:each="l : ${listaLivros}">
+						<td th:text="${l.id}"></td>
+						<td th:text="${l.titulo}"></td>
+						<td th:text="${l.categoria.nomeCategoria}">
+						</td>
 
+					</tr>
 				</tbody>
 			</table>
 		</div>
