@@ -2,116 +2,143 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="~{fragmentos/head :: head('Cadastro Categoria')}">
+
 </head>
 
-<body style="height: 1200px; margin: 0; padding: 0;">
+<body style=" margin: auto; padding: 0; width: 90%;">
 	<header th:replace="~{fragmentos/nav-bar :: nav-bar}"></header>
-	<div  class="container-fluid">
-		<div class="body-form" style="width: 90%; margin: auto;">
+	<div class="container-fluid">
+		<div class="body-form">
 			<header class="top-title">
 				<div class="painel-top">
 					<div th:replace="~{fragmentos/titulo-modulos :: modulo('Cadastrar Livros')}"></div>
 				</div>
 			</header>
 
-			<form id="formlivro" method="post" th:action="@{/livro/novo}" th:object="${livro}">
-				<div th:replace="~{fragmentos/menssagem :: menssagem}"></div>
+			<address>
+				<legend>Dados Do Livro</legend>
+				<form id="formlivro" method="post" th:action="@{/livro/novo}" th:object="${livro}">
+					<div th:replace="~{fragmentos/menssagem :: menssagem}"></div>
 
-				<div class="form-row">
-					<div class="form-group col-md-3">
-						<label for="id">ID</label>
-						<input name="id" th:field="*{id}" type="text" class="form-control" readonly="readonly" id="id"
-							placeholder="Ex: identificador">
+					<div class="form-row">
+						<div class="form-group col-md-3">
+							<label for="id">ID</label>
+							<input name="id" th:field="*{id}" type="text" class="form-control" readonly="readonly"
+								id="id" placeholder="Ex: identificador">
+						</div>
+
+
+						<div class="form-group col-md-4">
+							<label for="titulo">Titulo Do Livro</label>
+							<input th:errorClass="is-invalid" name="titulo" th:field="*{titulo}" type="text"
+								class="form-control" id="titulo" placeholder="Ex: Nome Do Livro">
+							<div style="display: block;" class="invalid-feedback" th:errors="*{titulo}"></div>
+						</div>
+
+						<div class="form-group col-md-4">
+							<label for="subtitulo">Sub-Titulo</label>
+							<input th:errorClass="is-invalid" name="subtitulo" th:field="*{subTitulo}" type="text"
+								class="form-control" id="subtitulo" placeholder="Ex: Assunto do Livro">
+							<div style="display: block;" class="invalid-feedback" th:errors="*{subTitulo}"></div>
+						</div>
 					</div>
 
-					<div class="form-group col-md-4">
-						<label for="titulo">Titulo Do Livro</label>
-						<input th:errorClass="is-invalid" name="titulo" th:field="*{titulo}" type="text"
-							class="form-control" id="titulo" placeholder="Ex: Nome Do Livro">
-						<div style="display: block;" class="invalid-feedback" th:errors="*{titulo}"></div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="urlcapalivro">Url da capa do livro</label>
+							<input th:errorClass="is-invalid" name="urlcapalivro" th:field="*{urlCapaLivro}" type="text"
+								class="form-control" id="urlcapalivro" placeholder="Ex: o indereco da imagem">
+							<div style="display: block;" class="invalid-feedback" th:errors="*{urlCapaLivro}"></div>
+						</div>
+
+						<div class="form-group col-md-4">
+							<label for="categoria">Categoria do Livro</label>
+							<select name="categoria" id="categoria" class="form-control">
+								<option selected>[--Selecione a Categoria--]</option>
+								<option th:each="categ : ${combCategorias}" th:value="${categ.id}"
+									th:field="*{categoria}" th:text="${categ.nomeCategoria}" />
+							</select>
+							<div style="display: block;" th:class="invalid-feedback" th:errors="*{categoria}"></div>
+						</div>
+
+						<div class="form-group col-md-2">
+							<label for="numerospaginas">Paginas</label><input type="number"
+								placeholder="Ex: Quantidade Paginas" class="form-control" id="numerospaginas">
+						</div>
+
+						<div class="form-group" style="width: 600px;">
+							<label for="exampleFormControlTextarea1">Descricao</label><textarea name="descricao"
+								th:field="*{descricao}" minlength="0" maxlength="600"
+								placeholder="Maximo 600 Caracteres" class="form-control"
+								id="exampleFormControlTextarea1" rows="3"></textarea>
+							<div style="display: block;" th:class="invalid-feedback" th:errors="*{descricao}"></div>
+						</div>
 					</div>
 
-					<div class="form-group col-md-4">
-						<label for="subtitulo">Sub-Titulo</label>
-						<input th:errorClass="is-invalid" name="subtitulo" th:field="*{subTitulo}" type="text"
-							class="form-control" id="subtitulo" placeholder="Ex: Assunto do Livro">
-						<div style="display: block;" class="invalid-feedback" th:errors="*{subTitulo}"></div>
-					</div>
-				</div>
-
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="urlcapalivro">Url da capa do livro</label>
-						<input th:errorClass="is-invalid" name="urlcapalivro" th:field="*{urlCapaLivro}" type="text"
-							class="form-control" id="urlcapalivro" placeholder="Ex: o indereco da imagem">
-						<div style="display: block;" class="invalid-feedback" th:errors="*{urlCapaLivro}"></div>
-					</div>
-
-					<div class="form-group col-md-4">
-						<label for="categoria">Categoria do Livro</label>
-						<select name="categoria" id="categoria" class="form-control">
-							<option selected>[--Selecione a Categoria--]</option>
-							<option th:each="categ : ${combCategorias}" th:value="${categ.id}" th:field="*{categoria}"
-								th:text="${categ.nomeCategoria}" />
-						</select>
-						<div style="display: block;" th:class="invalid-feedback" th:errors="*{categoria}"></div>
-					</div>
-
-					<div class="form-group col-md-2">
-						<label for="numerospaginas">Paginas</label><input type="number"
-							placeholder="Ex: Quantidade Paginas" class="form-control" id="numerospaginas">
-					</div>
-
-					<div class="form-group" style="width: 600px;">
-						<label for="exampleFormControlTextarea1">Descricao</label><textarea name="descricao"
-							th:field="*{descricao}" minlength="0" maxlength="600" placeholder="Maximo 600 Caracteres"
-							class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-						<div style="display: block;" th:class="invalid-feedback" th:errors="*{descricao}"></div>
-					</div>
-				</div>
-
-				<button type="submit" class="btn btn-primary">Registrar novo livro</button>
-				<button type="button" id="btn-limpar" class="btn btn-primary">limpar</button>
-			</form>
+					<button type="submit" class="btn btn-primary">Registrar novo livro</button>
+					<button type="button" id="btn-limpar" class="btn btn-primary">limpar</button>
+				</form>
+			</address>
 		</div>
+	</div>
+	<div class="body-table">
+		<div class="content-seach" style="display: flex; align-items: flex-end; justify-content: flex-end;">
+			<nav class="navbar navbar-light bg-light">
+				<form class="form-inline" id="form-seach" th:object="${tituloPesquisado}" method="post" action="/livro/consultar">
+					<input name="tituloPesquisado" th:value"*{tituloPesquisado}" style="width: 300px;" class="form-control mr-sm-2" type="text"
+						placeholder="digite  o titulo do livro  " aria-label="Search">
+					<button class="btn btn-success my-2 my-sm-0" type="submit">consultar livro</button>
+				</form>
 
+			</nav>
+		</div>
 	</div>
 	<div class="container-fluid">
-		<div class="body-table">
-			<div class="content-seach" style="display: flex; align-items: flex-end; justify-content: flex-end;">
-				<nav class="navbar navbar-light bg-light">
-					<form class="form-inline" id="formseach" method="post" action="/livro/consultar">
-						<input style="width: 300px;" class="form-control mr-sm-2" type="search"
-							placeholder="digite nome do livro  " aria-label="Search">
-						<button class="btn btn-success my-2 my-sm-0" type="submit">consultar livro</button>
-					</form>
-				</nav>
+		<address>
+
+			<legend>Tabela De Livros</legend>
+			<div class="body-table">
+				<table id="tabelaLivros" class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">Cod</th>
+							<th scope="col">Titulo</th>
+							<th scope="col">Categoria</th>
+							<th scope="col">Editar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="l : ${paginas.content}">
+							<td th:text="${l.id}"></td>
+							<td th:text="${l.titulo}"></td>
+							<td th:text="${l.categoria.nomeCategoria}"></td>
+							<td><a class="btn btn-primary" th:href="@{/livro/{id}/editar(id=${l.id})}"
+									role="button">Editar</a>
+						</tr>
+					</tbody>
+				</table>
+				<div style="height: 300px;">
+					<span th:if="${paginas.hasPrevious()}">
+						<a th:class="page-link" style="display: inline-block ; background-color: paleturquoise;"
+							th:href="@{/livro/pagination(page=${index}, size=${paginas.size} , tituloPesquisado=${tituloPesquisado})}">Anterior</a>
+					</span>
+
+					<th:block th:each="index : ${#numbers.sequence(0 , paginas.totalPages - 1)}">
+						<a th:unless="${paginas.totalPages == 0 } " th:class="page-link" style="display: inline-block ; background-color: paleturquoise;"
+							th:href="@{/livro/pagination(page=${index}, size=${paginas.size} , tituloPesquisado=${tituloPesquisado})}">[[${index}+1]]</a>
+
+					</th:block>
+
+					<span th:if="${paginas.hasNext()}">
+						<a th:class="page-link" style="display: inline-block ; background-color: paleturquoise;"
+							th:href="@{/livro/pagination(page=${index}, size=${paginas.size} , tituloPesquisado=${tituloPesquisado} )}">Proximo</a>
+					</span>
+					
+					<h2 th:if="${paginas.totalPages == 0 }" style="display: block;" th:class="invalid-feedback" >Nem Uma Pesquisa Encontrada</h2>
+
+				</div>
 			</div>
-		</div>
-
-		<div class="body-table" style=" margin: auto;">
-			<table id="tabelaLivros" class="table">
-				<span style="color: darkblue;"> Lista De Livros </span>
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">Cod</th>
-						<th scope="col">Tutulo</th>
-						<th scope="col">Categoria</th>
-						<th scope="col">Editar</th>
-						<th scope="col">Editar</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="l : ${listaLivros}">
-						<td th:text="${l.id}"></td>
-						<td th:text="${l.titulo}"></td>
-						<td th:text="${l.categoria.nomeCategoria}">
-						</td>
-
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		</address>
 	</div>
 
 </body>

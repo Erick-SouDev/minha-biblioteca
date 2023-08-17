@@ -1,20 +1,15 @@
 package erick.br.controler;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import erick.br.constantes.ConstMessagemSistem;
@@ -37,11 +32,12 @@ public class ControleCategoria {
 	}
 
 	@PostMapping(value = { "/categoria/salvar" })
-	public ModelAndView cadastrarCategoria(@Valid Categoria categoria, BindingResult bindingResult  ) {
+	public ModelAndView cadastrarCategoria(@Valid Categoria categoria, BindingResult bindingResult) {
 
 		ModelAndView modelview = new ModelAndView("view/cadCategoria");
 		if (bindingResult.hasErrors()) {
-			modelview.addObject("categorias", servicesCategoria.findAll(PageRequest.of(0, 5, Sort.by("nomeCategoria"))));
+			modelview.addObject("categorias",
+					servicesCategoria.findAll(PageRequest.of(0, 5, Sort.by("nomeCategoria"))));
 			return modelview;
 		}
 		if (categoria.getId() == null) {
@@ -50,13 +46,10 @@ public class ControleCategoria {
 		} else {
 			modelview.addObject("msg", ConstMessagemSistem.SUCCESS_UPDATE);
 		}
-
 		Categoria categoriaSalva = servicesCategoria.save(categoria);
 		modelview.addObject("categoria", categoriaSalva);
 		modelview.addObject("categorias", servicesCategoria.findAll(PageRequest.of(0, 5, Sort.by("nomeCategoria"))));
-
 		return modelview;
-
 	}
 
 	@GetMapping(value = { "/categoria/pagination" })
@@ -64,7 +57,6 @@ public class ControleCategoria {
 		ModelAndView modelAndView = new ModelAndView("view/cadCategoria");
 		modelAndView.addObject("categorias", servicesCategoria.findAll(pagina));
 		modelAndView.addObject("categoria", new Categoria());
-
 		return modelAndView;
 	}
 
@@ -76,7 +68,7 @@ public class ControleCategoria {
 		return modelview;
 
 	}
-	
+
 	@GetMapping(value = { "/categoria/{id}/excluir" })
 	public ModelAndView excluirCategoria(@PathVariable(value = "id") Long id) {
 		ModelAndView modelview = new ModelAndView("view/cadCategoria");

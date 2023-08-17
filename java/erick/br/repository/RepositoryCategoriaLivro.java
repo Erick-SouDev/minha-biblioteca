@@ -27,9 +27,7 @@ public interface RepositoryCategoriaLivro extends JpaRepository<Categoria, Long>
 	@Query("select c from Categoria c where c.id = ?1")
 	public Categoria editarCategoriaSelecionada(@Param("id") Long id);
 
-	
-	@Query("select c from Categoria c")
-	public Page<Categoria> findAllCategoriaPaginada(Pageable pageable); 
+
 
 	
 
