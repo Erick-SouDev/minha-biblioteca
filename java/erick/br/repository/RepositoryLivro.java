@@ -7,6 +7,8 @@ import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import erick.br.model.Livro;
@@ -25,5 +27,8 @@ public interface RepositoryLivro extends JpaRepository<Livro, Long> {
 		return findAll(example, pageable);
 
 	}
+
+	@Query("select l from Livro l where l.id = ?1")
+	public Livro getLivroPorId(@Param("id") Long id);
 
 }

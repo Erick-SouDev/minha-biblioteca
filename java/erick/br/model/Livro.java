@@ -3,7 +3,7 @@ package erick.br.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-import erick.br.anotacens.personalizadas.ValidacaoUrl;
+import erick.br.anotacoens.validation.UrlValidation;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,7 +35,7 @@ public class Livro implements Serializable {
 	@Column(name = "subtitulo", length = 150)
 	private String subTitulo;
 	
-	@ValidacaoUrl(text = "Url invalida informe a url do arquivo valido ex: em formato base64")
+	@UrlValidation(text = "Url invalida informe a url do arquivo valido ex: em formato base64")
 	@NotBlank(message = "informe a url ")
 	@Column(name = "urlcapalivro", columnDefinition = "text")
 	private String urlCapaLivro;

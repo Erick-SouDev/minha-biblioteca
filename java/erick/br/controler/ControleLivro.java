@@ -40,6 +40,9 @@ public class ControleLivro {
 	@GetMapping(value = { "/livro" })
 	public ModelAndView cadLivro() {
 		ModelAndView modelAndView = new ModelAndView("view/cadLivro");
+		
+		
+
 		modelAndView.addObject("combCategorias", repositoryCategoriaLivro.carregarCategorias());
 		modelAndView.addObject("paginas", repositoryLivro.findAll(PageRequest.of(0, 10, Sort.by("titulo"))));
 		modelAndView.addObject("livro", new Livro());
@@ -51,28 +54,26 @@ public class ControleLivro {
 		ModelAndView modelAndView = new ModelAndView("view/cadLivro");
 		if (bindingResult.hasErrors()) {
 			modelAndView.addObject("combCategorias", repositoryCategoriaLivro.carregarCategorias());
-			modelAndView.addObject("paginas", repositoryLivro.findAll(PageRequest.of(0, 10, Sort.by("titulo"))));
+			modelAndView.addObject("paginas", repositoryLivro.findAll(PageRequest.of(0, 5, Sort.by("titulo"))));
 			return modelAndView;
-
 		}
-
+		
 		if (livro.getId() == null) {
 			// e um novo livro
 			modelAndView.addObject("msg", ConstMessagemSistem.SUCCESS_SAVE);
 		} else {
 			modelAndView.addObject("msg", ConstMessagemSistem.SUCCESS_UPDATE);
-
 		}
+
 		Livro novoLivro = repositoryLivro.save(livro);
 		modelAndView.addObject("livro", novoLivro);
 		modelAndView.addObject("combCategorias", repositoryCategoriaLivro.carregarCategorias());
-		modelAndView.addObject("paginas", repositoryLivro.findAll(PageRequest.of(0, 10, Sort.by("titulo"))));
-
+		modelAndView.addObject("paginas", repositoryLivro.findAll(PageRequest.of(0, 5, Sort.by("titulo"))));
 		return modelAndView;
 	}
 
 	@GetMapping(value = { "/livro/pagination" })
-	public ModelAndView livroPagination(@PageableDefault(page = 10) Pageable pagina) {
+	public ModelAndView livroPagination(@PageableDefault(page = 5) Pageable pagina) {
 		ModelAndView modelAndView = new ModelAndView("view/cadLivro");
 
 		modelAndView.addObject("paginas", repositoryLivro.findAll(pagina));
@@ -90,23 +91,25 @@ public class ControleLivro {
 		modelAndView.addObject("livro", new Livro());
 		modelAndView.addObject("livro", livro);
 		modelAndView.addObject("combCategorias", repositoryCategoriaLivro.carregarCategorias());
-		modelAndView.addObject("paginas", repositoryLivro.findAll(PageRequest.of(0, 10, Sort.by("titulo"))));
+		modelAndView.addObject("paginas", repositoryLivro.findAll(PageRequest.of(0, 5, Sort.by("titulo"))));
 		return modelAndView;
 
 	}
 
-	@PostMapping(value = { "/livro/consultar" }  )
+	@PostMapping(value = { "/livro/consultar" })
 	public ModelAndView pesquisarLivro(@RequestParam("tituloPesquisado") String tituloPesquisado,
-		 @PageableDefault(size = 10)	Pageable pageable  ) {
+			@PageableDefault(size = 5) Pageable pageable) {
 		ModelAndView modelview = new ModelAndView("view/cadLivro");
-		
-		Page<Livro> page = repositoryLivro.findPagableLivro(tituloPesquisado, pageable);
-	
-		System.out.println(page.getTotalPages());
-		
-		
-		modelview.addObject("paginas", page);
 
+		Page<Livro> page = null;
+		if (tituloPesquisado != null && !tituloPesquisado.isEmpty()) {
+			page = repositoryLivro.findPagableLivro(tituloPesquisado, pageable);
+
+		} else {
+			page = repositoryLivro.findAll(pageable);
+		}
+
+		modelview.addObject("paginas", page);
 		modelview.addObject("tituloPesquisado", tituloPesquisado);
 		modelview.addObject("combCategorias", repositoryCategoriaLivro.carregarCategorias());
 		modelview.addObject("livro", new Livro());

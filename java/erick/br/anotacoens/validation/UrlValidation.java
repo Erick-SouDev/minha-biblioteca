@@ -1,4 +1,4 @@
-package erick.br.anotacens.personalizadas;
+package erick.br.anotacoens.validation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -9,8 +9,8 @@ import jakarta.validation.Payload;
 
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ValidacaoUUtil.class)
-public @interface ValidacaoUrl {
+@Constraint(validatedBy = ValidationUrlUtil.class)
+public @interface UrlValidation {
 
 	String text();
 
