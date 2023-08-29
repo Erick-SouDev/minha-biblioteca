@@ -35,7 +35,7 @@ public class Livro implements Serializable {
 	@Column(name = "subtitulo", length = 150)
 	private String subTitulo;
 	
-	@UrlValidation(text = "Url invalida informe a url do arquivo valido ex: em formato base64")
+	@UrlValidation(message = "Informe  uma url  valida" , text = "")
 	@NotBlank(message = "informe a url ")
 	@Column(name = "urlcapalivro", columnDefinition = "text")
 	private String urlCapaLivro;
