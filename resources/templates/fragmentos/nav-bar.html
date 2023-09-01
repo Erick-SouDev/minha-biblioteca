@@ -1,7 +1,12 @@
 <header style="height: 200px;" th:fragment="nav-bar">
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<img src="/src/main/resources/static/images/logo-topo.jpg" width="80" height="80">
+		<!--
+		<img src="/logo.jpg" width="80" height="80">
+			
+			
+		-->
+		<img src="static/imagens/logo.jpg" width="80" height="80">
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
 			aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,8 +36,8 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 						<a class="dropdown-item" th:href="@{/livro}">Cadastrar Livros</a>
+						<a class="dropdown-item" th:href="@{/categoria}">Cadastrar Categoria</a>
 						<a class="dropdown-item" href="">Cadastrar Usuarios</a>
-						<a class="dropdown-item" href="/categoria">Cadastrar Categoria</a>
 					</div>
 				</li>
 			</ul>
