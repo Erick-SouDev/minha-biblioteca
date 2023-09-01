@@ -8,7 +8,7 @@ public class ControlerLogin {
 
 	
 	@GetMapping(value = {"/"})
-	public String pageLogin() {
+	public String index() {
 		
 		
 		return "view/login";

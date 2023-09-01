@@ -15,13 +15,13 @@ public class ViewContreller implements WebMvcConfigurer {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/login").setViewName("view/login");
-		registry.setOrder(Ordered.LOWEST_PRECEDENCE);
+		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
 	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**" , "static/**").addResourceLocations("/", "classpath:/static/**" , "classpath:/static/imagens/**" ,"classpath/imagens/**")
-				.setCachePeriod(31556926);
+		registry.addResourceHandler("/resources/**", "/static/**", "/imagens/**", "icones/**", "js/**", "css/**")
+				.addResourceLocations("classpth:resources/", "classpath:/static/").setCachePeriod(31556926);
 	}
 }

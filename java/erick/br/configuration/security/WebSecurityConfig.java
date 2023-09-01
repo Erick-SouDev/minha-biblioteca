@@ -29,12 +29,13 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http.csrf().disable().authorizeRequests().requestMatchers(HttpMethod.GET, "/").permitAll()
-				.requestMatchers(HttpMethod.GET, "/home"  ).hasRole("USER")
-				
-				
-				
+		       //permitir ocaminho das pastas staticas
+				.requestMatchers("/home").hasAnyRole("USER" ,"ADMIN" , "GERENTE")
+				.requestMatchers("categoria/**" , "livro/**").hasAnyRole( "ADMIN" , "GERENTE")
+
 				.and().formLogin().loginPage("/login")
-				.defaultSuccessUrl("/home").failureUrl("/login?error=true").and().logout()
+				
+				.defaultSuccessUrl("/home").failureUrl("/?error=true").and().logout().invalidateHttpSession(true)
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 		        
 		
@@ -43,7 +44,7 @@ public class WebSecurityConfig {
 
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
-		return (web) -> web.ignoring().requestMatchers("**imagens/**");
+		return (web) -> web.ignoring().requestMatchers("**imagens/**" );
 	}
 
 	@Bean
