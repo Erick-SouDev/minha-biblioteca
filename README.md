@@ -23,4 +23,4 @@ Pesquisa avançada de livros por título, autor, gênero, etc.
 Autenticação de usuários com Spring Security e controle de permissões.
 Interface amigável para facilitar a navegação e interação do usuário.
 Considerações Finais:
-Este projeto visa aprimorar as habilidades de desenvolvimento web, oferecendo a oportunidade de aplicar conceitos avançados de segurança em aplicações web. Além disso, servirá como uma base sólida para futuras explorações e projetos mais avançados na área de desenvolvimento de software seguro.
+Este projeto visa aprimorar as habilidades de desenvolvimento web, oferecendo a oportunidade de aplicar conceitos avançados de segurança em aplicações web. Além disso, servirá como uma base sólida para futuras explorações e projetos mais avançados na área de desenvolvimento de software seguro ainda nao  finalisado . 
