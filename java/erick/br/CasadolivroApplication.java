@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EntityScan(basePackages = {"erick.br.model"})
 public class CasadolivroApplication {
 
-	public static void main(String[] args) {
+	public  static void main(String[] args) {
 		SpringApplication.run(CasadolivroApplication.class, args);
 		
 		

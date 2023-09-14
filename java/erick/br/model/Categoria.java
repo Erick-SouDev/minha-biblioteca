@@ -15,7 +15,7 @@ import jakarta.validation.constraints.NotEmpty;
 @Entity
 public class Categoria implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private  final long serialVersionUID = 1L;
 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id

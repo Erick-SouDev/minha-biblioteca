@@ -18,7 +18,7 @@ import erick.br.services.user.details.ImplementServicesUserDatails;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig {
+public class IntercpetorRequestConfig {
 
 	
 	
@@ -28,10 +28,11 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-		http.csrf().disable().authorizeRequests().requestMatchers(HttpMethod.GET, "/").permitAll()
-		       //permitir ocaminho das pastas staticas
-				.requestMatchers("/home").hasAnyRole("USER" ,"ADMIN" , "GERENTE")
-				.requestMatchers("categoria/**" , "livro/**").hasAnyRole( "ADMIN" , "GERENTE")
+		http.csrf().disable().authorizeRequests()
+		        .requestMatchers(HttpMethod.GET, "/").permitAll()
+				.requestMatchers("/home")
+				.hasAnyRole("USER")
+				.requestMatchers("categoria/**" , "livro/**").hasAnyRole("ADMIN" , "USER")
 
 				.and().formLogin().loginPage("/login")
 				
@@ -44,7 +45,7 @@ public class WebSecurityConfig {
 
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
-		return (web) -> web.ignoring().requestMatchers("**imagens/**" );
+		return (web) -> web.ignoring().requestMatchers("**resources/**" );
 	}
 
 	@Bean

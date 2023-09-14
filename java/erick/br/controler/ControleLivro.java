@@ -60,7 +60,12 @@ public class ControleLivro {
 		
 		if (livro.getId() == null) {
 			// e um novo livro
-			modelAndView.addObject("msg", ConstMessagemSistem.SUCCESS_SAVE);
+			try {
+				modelAndView.addObject("msg", ConstMessagemSistem.SUCCESS_SAVE);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			modelAndView.addObject("msg", ConstMessagemSistem.SUCCESS_UPDATE);
 		}

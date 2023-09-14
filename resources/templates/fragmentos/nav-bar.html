@@ -3,13 +3,11 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<!--
 		<img src="/logo.jpg" width="80" height="80">
-			
-			
-		-->
-		<img src="static/imagens/logo.jpg" width="80" height="80">
 
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-			aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		-->
+		<img src="/imagens/logo.jpg" width="80" height="80">
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"	aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -29,12 +27,12 @@
 				<li class="nav-item">
 					<a class="nav-link" href="#">Meus Dados</a>
 				</li>
-				<li class="nav-item dropdown">
+				<li sec:authorize="hasAnyRole('ROLE_ADMIN' , 'ROLE_GERENTE')" class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">
 						Administracao
 					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<div  class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 						<a class="dropdown-item" th:href="@{/livro}">Cadastrar Livros</a>
 						<a class="dropdown-item" th:href="@{/categoria}">Cadastrar Categoria</a>
 						<a class="dropdown-item" href="">Cadastrar Usuarios</a>

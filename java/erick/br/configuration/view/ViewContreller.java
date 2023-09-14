@@ -21,7 +21,7 @@ public class ViewContreller implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**", "/static/**", "/imagens/**", "icones/**", "js/**", "css/**")
-				.addResourceLocations("classpth:resources/", "classpath:/static/").setCachePeriod(31556926);
+		registry.addResourceHandler("/resources/**")
+				.addResourceLocations("/resources/").resourceChain(true);
 	}
 }
